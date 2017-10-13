@@ -9,8 +9,6 @@ import de.pifrasso.model.WorkOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-
 @RestController
 public class WorkOrderController {
 
@@ -29,17 +27,17 @@ public class WorkOrderController {
         return result;
     }
 
-    //@RequestMapping(value = "/workOrders",  produces = APPLICATION_JSON_VALUE)
+    //@RequestMapping(value = "/workOrders")
     //public List<WorkOrder> allWorkOrders() {
     //    return workOrderRepository.findAll();
     //}
 
-    //@RequestMapping(value = "/workOrder/{id}",  produces = APPLICATION_JSON_VALUE)
+    //@RequestMapping(value = "/workOrder/{id}")
     //public WorkOrder oneWorkOrder(@PathVariable("id") Long id) {
    //     return workOrderRepository.findOne(id);
     //}
 
-    @RequestMapping(method = RequestMethod.POST, value = "/workOrder", produces = APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.POST, value = "/workOrder")
     public WorkOrder register(@RequestBody WorkOrder workOrder) {
         workOrderRepository.save(workOrder);
         /*
