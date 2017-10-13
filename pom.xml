@@ -83,19 +83,25 @@
             <version>5.0.12.Final</version>
         </dependency>
 
+        <!--
+                <dependency>
+                    <groupId>de.sky-eye.dispolino</groupId>
+                    <artifactId>rail-stammdaten</artifactId>
+                    <version>1702</version>
+                </dependency>
+
+                <dependency>
+                    <groupId>de.sky-eye.dispolino</groupId>
+                    <artifactId>rail-fahrzeug</artifactId>
+                    <version>1702</version>
+                </dependency>
+        -->
 
         <dependency>
-            <groupId>de.sky-eye.dispolino</groupId>
-            <artifactId>rail-stammdaten</artifactId>
-            <version>1702</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.6</version>
         </dependency>
-<!--
-        <dependency>
-            <groupId>de.sky-eye.dispolino</groupId>
-            <artifactId>rail-fahrzeug</artifactId>
-            <version>1702</version>
-        </dependency>
--->
 
     </dependencies>
 

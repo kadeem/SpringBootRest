@@ -8,7 +8,8 @@ import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.*;
 import de.pifrasso.model.Customer;
 import de.pifrasso.model.CustomerRepository;
-import org.apache.commons.lang.StringUtils;
+//import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @SpringUI
@@ -19,9 +20,9 @@ public class VaadinUi extends UI {
 
     private final CustomerEditor editor;
 
-    final Grid<Customer> grid;
+    private final Grid<Customer> grid;
 
-    final TextField filter;
+    private final TextField filter;
 
     private final Button addNewBtn;
 
@@ -71,7 +72,7 @@ public class VaadinUi extends UI {
     }
 
     // tag::listCustomers[]
-    void listCustomers(String filterText) {
+    private void listCustomers(String filterText) {
         if (StringUtils.isEmpty(filterText)) {
             grid.setItems(repo.findAll());
         }
