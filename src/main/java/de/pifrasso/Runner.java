@@ -4,23 +4,19 @@ import de.pifrasso.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.http.MediaType;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.TreeSet;
 
 @RestController
 @SpringBootApplication
@@ -29,8 +25,8 @@ import java.util.Date;
 //@EnableJpaRepositories ( basePackages = {"de.skyeye.rail.stammdaten.model","de.pifrasso.model"})
 
 //@EntityScan(basePackageClasses ={de.skyeye.rail.stammdaten.model.HandbremseArt.class, WorkOrder.class})
-//@EnableJpaRepositories
-@EnableSwagger2
+@EnableJpaRepositories
+//@EnableSwagger2
 
 public class Runner {
 
@@ -53,6 +49,7 @@ public class Runner {
                            DefectCodeRepository defectCodeRepository,
                            DefectRepository defectRepository,
                            CustomerRepository customerRepository,
+                           WaggonSequenceRepository waggonSequenceRepository,
                            ShunterOrderRepository shunterOrderRepository) {
         return (args) -> {
             User franz = userRepository.save(new User("Andreas", "Franz", "fra", "fra"));
@@ -73,8 +70,17 @@ public class Runner {
             WorkOrder wo4 = workOrderRepository.save(new WorkOrder("WTU4", frass, new Date(), new Date(), WorkOrderStatus.New));
             WorkOrder wo5 = workOrderRepository.save(new WorkOrder("WTU5", franz, new Date(), new Date(), WorkOrderStatus.New));
 
-            //ShunterOrder so1 = shunterOrderRepository.save(new ShunterOrder("R1", frass, new Date(), new Date(), WorkOrderStatus.New, Arrays.asList(w1, w2, w3)));
-            //ShunterOrder so2 = shunterOrderRepository.save(new ShunterOrder("R2", frass, new Date(), new Date(), WorkOrderStatus.New, Arrays.asList(w2, w3, w4, w1)));
+
+
+            WaggonSequence ws1 = waggonSequenceRepository.save(new WaggonSequence(w1,1));
+            WaggonSequence ws2 = waggonSequenceRepository.save(new WaggonSequence(w2,2));
+
+            WaggonSequence ws3 = waggonSequenceRepository.save(new WaggonSequence(w3,3));
+            WaggonSequence ws4 = waggonSequenceRepository.save(new WaggonSequence(w4,2));
+            WaggonSequence ws5 = waggonSequenceRepository.save(new WaggonSequence(w5,1));
+
+            ShunterOrder so1 = shunterOrderRepository.save(new ShunterOrder("R1", frass, new Date(), new Date(), WorkOrderStatus.New, new TreeSet(){{add(ws1);add(ws2);}}));
+            ShunterOrder so2 = shunterOrderRepository.save(new ShunterOrder("R2", frass, new Date(), new Date(), WorkOrderStatus.New, new TreeSet(){{add(ws3);add(ws4);add(ws5);}}));
 
 
             DefectCode dc1 = defectCodeRepository.save(new DefectCode("1.0.0", "First", "part"));
@@ -130,6 +136,7 @@ public class Runner {
         };
     }
 
+    /*
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
@@ -138,5 +145,5 @@ public class Runner {
                 .paths(PathSelectors.any())
                 .build();
     }
-
+*/
 }

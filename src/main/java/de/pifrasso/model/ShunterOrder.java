@@ -1,42 +1,35 @@
 package de.pifrasso.model;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import javax.persistence.*;
+import java.util.*;
 
 @Entity
 public class ShunterOrder extends WorkOrder{
 
     @OneToMany
-    private List<WaggonSequence> waggonSequence;
+    @OrderBy("sort")
+    private SortedSet<WaggonSequence> waggonSequence = new TreeSet<>();
 
     protected ShunterOrder(){}
 
-    public ShunterOrder(String name, User user, Date begin, Date end, WorkOrderStatus status, List<Waggon> waggons){
+    public ShunterOrder(String name, User user, Date begin, Date end, WorkOrderStatus status, SortedSet<WaggonSequence> waggonSequence){
         setName(name);
         setUser(user);
         setBegin(begin);
         setEnd(end);
         setStatus(status);
-        setWaggonSequenceByWaggons(waggons);
+
+
+        setWaggonSequence(waggonSequence);
     }
 
-    public List<WaggonSequence> getWaggonSequence() {
+    public SortedSet<WaggonSequence> getWaggonSequence() {
         return waggonSequence;
     }
 
-    public void setWaggonSequence(List<WaggonSequence> waggonSequence) {
+    public void setWaggonSequence(SortedSet<WaggonSequence> waggonSequence) {
         this.waggonSequence = waggonSequence;
     }
 
 
-    public void setWaggonSequenceByWaggons(List<Waggon> waggons) {
-        List<WaggonSequence> ws = new ArrayList<>();
-        ws.add(new WaggonSequence());
-
-        this.waggonSequence = ws;
-    }
 }

@@ -18,13 +18,9 @@ import org.springframework.util.StringUtils;
 public class VaadinUi extends UI {
 
     private final CustomerRepository repo;
-
     private final CustomerEditor editor;
-
     private final Grid<Customer> grid;
-
     private final TextField filter;
-
     private final Button addNewBtn;
 
     @Autowired
@@ -67,12 +63,9 @@ public class VaadinUi extends UI {
             editor.setVisible(false);
             listCustomers(filter.getValue());
         });
-
-        // Initialize listing
         listCustomers(null);
     }
 
-    // tag::listCustomers[]
     private void listCustomers(String filterText) {
         if (StringUtils.isEmpty(filterText)) {
             grid.setItems(repo.findAll());
@@ -81,5 +74,4 @@ public class VaadinUi extends UI {
             grid.setItems(repo.findByLastNameStartsWithIgnoreCase(filterText));
         }
     }
-    // end::listCustomers[]
 }
