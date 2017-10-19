@@ -47,4 +47,26 @@ public class WorkOrderController {
     */
         return workOrder;
     }
+
+    @RequestMapping("/system")
+    public Map<String,String> getSystemProperties() {
+
+        Map<String,String> map = new HashMap<String,String>();
+
+        System.getProperties()
+                .entrySet()
+                .stream()
+                .forEach(entry -> map.put((String) entry.getKey(),
+                        (String) entry.getValue()));
+
+        return map;
+    }
+    @RequestMapping("/system2")
+    public Map<String,String> getSystemProperties2() {
+
+        Map<String,String> map = new HashMap<String,String>();
+        map.put("os.name", System.getProperty("os.name"));
+        map.put("java.version", System.getProperty("java.version"));
+        return map;
+    }
 }

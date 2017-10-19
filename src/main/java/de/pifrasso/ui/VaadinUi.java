@@ -1,6 +1,7 @@
 package de.pifrasso.ui;
 
 import com.vaadin.annotations.Theme;
+import com.vaadin.annotations.Title;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.shared.ui.ValueChangeMode;
@@ -8,11 +9,11 @@ import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.*;
 import de.pifrasso.model.Customer;
 import de.pifrasso.model.CustomerRepository;
-//import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 
-@SpringUI
+@SpringUI(path = "/ui/customer")
+@Title("Customer Page")
 @Theme("valo")
 public class VaadinUi extends UI {
 

@@ -16,18 +16,14 @@ public class WorkOrder {
     private Date end;
     private WorkOrderStatus status;
 
-    @ManyToMany
-    private List<Waggon> waggons;
-
     protected WorkOrder(){}
 
-    public WorkOrder(String name, User user, Date begin, Date end, WorkOrderStatus status, List<Waggon> waggons){
+    public WorkOrder(String name, User user, Date begin, Date end, WorkOrderStatus status){
         setName(name);
-        this.user = user;
+        setUser(user);
         setBegin(begin);
         setEnd(end);
         setStatus(status);
-        this.waggons = waggons;
     }
 
     public String getName() {
@@ -36,6 +32,14 @@ public class WorkOrder {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Date getBegin() {

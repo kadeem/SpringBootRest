@@ -13,6 +13,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -20,9 +25,12 @@ import java.util.Date;
 @RestController
 @SpringBootApplication
 //@EnableJpaRepositories("de.skyeye.rail.fahrzeug.model.*")
-//@ComponentScan(basePackages = { "de.skyeye.rail.fahrzeug.model.*" })
+//@ComponentScan(basePackages = { "de.skyeye.rail.stammdaten.model.HandbremseArt","de.pifrasso.model"})
+//@EnableJpaRepositories ( basePackages = {"de.skyeye.rail.stammdaten.model","de.pifrasso.model"})
 
-//@EntityScan(basePackages ={"de.skyeye.rail.stammdaten.model.HandbremseArt", "de.pifrasso.model.*"})
+//@EntityScan(basePackageClasses ={de.skyeye.rail.stammdaten.model.HandbremseArt.class, WorkOrder.class})
+//@EnableJpaRepositories
+@EnableSwagger2
 
 public class Runner {
 
@@ -44,7 +52,8 @@ public class Runner {
                            WaggonRepository waggonRepository,
                            DefectCodeRepository defectCodeRepository,
                            DefectRepository defectRepository,
-                           CustomerRepository customerRepository) {
+                           CustomerRepository customerRepository,
+                           ShunterOrderRepository shunterOrderRepository) {
         return (args) -> {
             User franz = userRepository.save(new User("Andreas", "Franz", "fra", "fra"));
             User bajohra = userRepository.save(new User("Andreas", "Bajohra", "baj", "baj"));
@@ -58,11 +67,15 @@ public class Runner {
             Waggon w4 = waggonRepository.save(new Waggon("1414141412"));
             Waggon w5 = waggonRepository.save(new Waggon("6577474745"));
 
-            WorkOrder wo1 = workOrderRepository.save(new WorkOrder("WTU1", frass, new Date(), new Date(), WorkOrderStatus.New, Arrays.asList(w1, w2, w3)));
-            WorkOrder wo2 = workOrderRepository.save(new WorkOrder("WTU2", frass, new Date(), new Date(), WorkOrderStatus.New, null));
-            WorkOrder wo3 = workOrderRepository.save(new WorkOrder("WTU3", frass, new Date(), new Date(), WorkOrderStatus.New, null));
-            WorkOrder wo4 = workOrderRepository.save(new WorkOrder("WTU4", frass, new Date(), new Date(), WorkOrderStatus.New, null));
-            WorkOrder wo5 = workOrderRepository.save(new WorkOrder("WTU5", franz, new Date(), new Date(), WorkOrderStatus.New, null));
+            WorkOrder wo1 = workOrderRepository.save(new WorkOrder("WTU1", frass, new Date(), new Date(), WorkOrderStatus.New));
+            WorkOrder wo2 = workOrderRepository.save(new WorkOrder("WTU2", frass, new Date(), new Date(), WorkOrderStatus.New));
+            WorkOrder wo3 = workOrderRepository.save(new WorkOrder("WTU3", frass, new Date(), new Date(), WorkOrderStatus.New));
+            WorkOrder wo4 = workOrderRepository.save(new WorkOrder("WTU4", frass, new Date(), new Date(), WorkOrderStatus.New));
+            WorkOrder wo5 = workOrderRepository.save(new WorkOrder("WTU5", franz, new Date(), new Date(), WorkOrderStatus.New));
+
+            //ShunterOrder so1 = shunterOrderRepository.save(new ShunterOrder("R1", frass, new Date(), new Date(), WorkOrderStatus.New, Arrays.asList(w1, w2, w3)));
+            //ShunterOrder so2 = shunterOrderRepository.save(new ShunterOrder("R2", frass, new Date(), new Date(), WorkOrderStatus.New, Arrays.asList(w2, w3, w4, w1)));
+
 
             DefectCode dc1 = defectCodeRepository.save(new DefectCode("1.0.0", "First", "part"));
             DefectCode dc2 = defectCodeRepository.save(new DefectCode("1.0.1", "Second", "part"));
@@ -77,9 +90,9 @@ public class Runner {
 
             // save a couple of customers
             customerRepository.save(new Customer("Peter", "Bauer"));
-            customerRepository.save(new Customer("Malcolm", "Harald"));
+            customerRepository.save(new Customer("Markus", "Petersen"));
             customerRepository.save(new Customer("Kim", "Schmitz"));
-            customerRepository.save(new Customer("David", "Palmer"));
+            customerRepository.save(new Customer("David", "Davidsen"));
             customerRepository.save(new Customer("Stefan", "Stefansen"));
 
             // fetch all customers
@@ -116,4 +129,14 @@ public class Runner {
 
         };
     }
+
+    @Bean
+    public Docket api() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("de.pifrasso"))
+                .paths(PathSelectors.any())
+                .build();
+    }
+
 }

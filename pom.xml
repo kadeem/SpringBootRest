@@ -8,7 +8,12 @@
     <artifactId>SpringBootRest</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-
+    <repositories>
+    <repository>
+        <id>vaadin-addons</id>
+        <url>http://maven.vaadin.com/vaadin-addons</url>
+    </repository>
+    </repositories>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <javac.target>1.8</javac.target>
@@ -71,10 +76,27 @@
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
         </dependency>
+
+
+
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-spring-boot-starter</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.tepi.filtertable</groupId>
+            <artifactId>filteringtable</artifactId>
+            <version>1.0.1.v8</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.vaadin.addon</groupId>
+            <artifactId>tableexport-for-vaadin</artifactId>
+            <version>1.6.2</version>
+        </dependency>
+
+
 
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -83,24 +105,44 @@
         </dependency>
 
         <!--
-                <dependency>
-                    <groupId>de.sky-eye.dispolino</groupId>
-                    <artifactId>rail-stammdaten</artifactId>
-                    <version>1702</version>
-                </dependency>
-
-                <dependency>
-                    <groupId>de.sky-eye.dispolino</groupId>
-                    <artifactId>rail-fahrzeug</artifactId>
-                    <version>1702</version>
-                </dependency>
-        -->
-
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.6</version>
+            <version>3.0</version>
         </dependency>
+-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.7.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.7.0</version>
+        </dependency>
+
+
+        <!--
+
+        <dependency>
+            <groupId>de.sky-eye.dispolino</groupId>
+            <artifactId>rail-stammdaten</artifactId>
+            <version>1703-cfl</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.hibernate</groupId>
+                    <artifactId>hibernate-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>de.sky-eye.dispolino</groupId>
+            <artifactId>rail-fahrzeug</artifactId>
+            <version>1702</version>
+        </dependency>
+-->
 
     </dependencies>
 
