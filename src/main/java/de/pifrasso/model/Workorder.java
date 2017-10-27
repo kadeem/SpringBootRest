@@ -2,10 +2,9 @@ package de.pifrasso.model;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Entity
-public class WorkOrder {
+public class Workorder {
     @Id
     @GeneratedValue
     private long id;
@@ -14,11 +13,11 @@ public class WorkOrder {
     private User user;
     private Date begin;
     private Date end;
-    private WorkOrderStatus status;
+    private WorkorderStatus status;
 
-    protected WorkOrder(){}
+    protected Workorder(){}
 
-    public WorkOrder(String name, User user, Date begin, Date end, WorkOrderStatus status){
+    public Workorder(String name, User user, Date begin, Date end, WorkorderStatus status){
         setName(name);
         setUser(user);
         setBegin(begin);
@@ -62,11 +61,11 @@ public class WorkOrder {
         return id;
     }
 
-    public WorkOrderStatus getStatus() {
+    public WorkorderStatus getStatus() {
         return status;
     }
 
-    public void setStatus(WorkOrderStatus status) {
+    public void setStatus(WorkorderStatus status) {
         this.status = status;
     }
 

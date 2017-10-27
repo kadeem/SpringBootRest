@@ -1,11 +1,10 @@
 package de.pifrasso.controller;
 
-import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
-import de.pifrasso.model.WorkOrder;
-import de.pifrasso.model.WorkOrderRepository;
+import de.pifrasso.model.Workorder;
+import de.pifrasso.model.WorkorderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,11 +12,11 @@ import org.springframework.web.bind.annotation.*;
 public class WorkOrderController {
 
 
-    private final WorkOrderRepository workOrderRepository;
+    private final WorkorderRepository workorderRepository;
 
     @Autowired
-    public WorkOrderController(WorkOrderRepository workOrderRepository){
-        this.workOrderRepository=workOrderRepository;
+    public WorkOrderController(WorkorderRepository workorderRepository){
+        this.workorderRepository = workorderRepository;
     }
 
     @RequestMapping("/sample")
@@ -28,24 +27,24 @@ public class WorkOrderController {
     }
 
     //@RequestMapping(value = "/workOrders")
-    //public List<WorkOrder> allWorkOrders() {
-    //    return workOrderRepository.findAll();
+    //public List<Workorder> allWorkOrders() {
+    //    return workorderRepository.findAll();
     //}
 
     //@RequestMapping(value = "/workOrder/{id}")
-    //public WorkOrder oneWorkOrder(@PathVariable("id") Long id) {
-   //     return workOrderRepository.findOne(id);
+    //public Workorder oneWorkOrder(@PathVariable("id") Long id) {
+   //     return workorderRepository.findOne(id);
     //}
 
     @RequestMapping(method = RequestMethod.POST, value = "/workOrder")
-    public WorkOrder register(@RequestBody WorkOrder workOrder) {
-        workOrderRepository.save(workOrder);
+    public Workorder register(@RequestBody Workorder workorder) {
+        workorderRepository.save(workorder);
         /*
         if(usernameAlreadyExists) {
             throw new IllegalArgumentException("error.username");
         }
     */
-        return workOrder;
+        return workorder;
     }
 
     @RequestMapping("/system")

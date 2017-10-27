@@ -1,6 +1,6 @@
 package de.pifrasso.model;
 
-public enum WorkOrderStatus {
+public enum WorkorderStatus {
     New,
 Planned,
 Active,

@@ -15,7 +15,7 @@ import org.springframework.util.StringUtils;
 @SpringUI(path = "/ui/customer")
 @Title("Customer Page")
 @Theme("valo")
-public class VaadinUi extends UI {
+public class VaadinUI extends UI {
 
     private final CustomerRepository repo;
     private final CustomerEditor editor;
@@ -24,7 +24,7 @@ public class VaadinUi extends UI {
     private final Button addNewBtn;
 
     @Autowired
-    public VaadinUi(CustomerRepository repo, CustomerEditor editor) {
+    public VaadinUI(CustomerRepository repo, CustomerEditor editor) {
         this.repo = repo;
         this.editor = editor;
         this.grid = new Grid<>(Customer.class);

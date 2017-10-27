@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.*;
 
 @Entity
-public class ShunterOrder extends WorkOrder{
+public class ShunterOrder extends Workorder {
 
     @OneToMany
     @OrderBy("sort")
@@ -12,7 +12,7 @@ public class ShunterOrder extends WorkOrder{
 
     protected ShunterOrder(){}
 
-    public ShunterOrder(String name, User user, Date begin, Date end, WorkOrderStatus status, SortedSet<WaggonSequence> waggonSequence){
+    public ShunterOrder(String name, User user, Date begin, Date end, WorkorderStatus status, SortedSet<WaggonSequence> waggonSequence){
         setName(name);
         setUser(user);
         setBegin(begin);

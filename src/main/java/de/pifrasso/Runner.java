@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.TreeSet;
 
@@ -24,7 +22,7 @@ import java.util.TreeSet;
 //@ComponentScan(basePackages = { "de.skyeye.rail.stammdaten.model.HandbremseArt","de.pifrasso.model"})
 //@EnableJpaRepositories ( basePackages = {"de.skyeye.rail.stammdaten.model","de.pifrasso.model"})
 
-//@EntityScan(basePackageClasses ={de.skyeye.rail.stammdaten.model.HandbremseArt.class, WorkOrder.class})
+//@EntityScan(basePackageClasses ={de.skyeye.rail.stammdaten.model.HandbremseArt.class, Workorder.class})
 @EnableJpaRepositories
 //@EnableSwagger2
 
@@ -44,7 +42,7 @@ public class Runner {
 
     @Bean
     CommandLineRunner init(UserRepository userRepository,
-                           WorkOrderRepository workOrderRepository,
+                           WorkorderRepository workorderRepository,
                            WaggonRepository waggonRepository,
                            DefectCodeRepository defectCodeRepository,
                            DefectRepository defectRepository,
@@ -64,11 +62,11 @@ public class Runner {
             Waggon w4 = waggonRepository.save(new Waggon("1414141412"));
             Waggon w5 = waggonRepository.save(new Waggon("6577474745"));
 
-            WorkOrder wo1 = workOrderRepository.save(new WorkOrder("WTU1", frass, new Date(), new Date(), WorkOrderStatus.New));
-            WorkOrder wo2 = workOrderRepository.save(new WorkOrder("WTU2", frass, new Date(), new Date(), WorkOrderStatus.New));
-            WorkOrder wo3 = workOrderRepository.save(new WorkOrder("WTU3", frass, new Date(), new Date(), WorkOrderStatus.New));
-            WorkOrder wo4 = workOrderRepository.save(new WorkOrder("WTU4", frass, new Date(), new Date(), WorkOrderStatus.New));
-            WorkOrder wo5 = workOrderRepository.save(new WorkOrder("WTU5", franz, new Date(), new Date(), WorkOrderStatus.New));
+            Workorder wo1 = workorderRepository.save(new Workorder("WTU1", frass, new Date(), new Date(), WorkorderStatus.New));
+            Workorder wo2 = workorderRepository.save(new Workorder("WTU2", frass, new Date(), new Date(), WorkorderStatus.New));
+            Workorder wo3 = workorderRepository.save(new Workorder("WTU3", frass, new Date(), new Date(), WorkorderStatus.New));
+            Workorder wo4 = workorderRepository.save(new Workorder("WTU4", frass, new Date(), new Date(), WorkorderStatus.New));
+            Workorder wo5 = workorderRepository.save(new Workorder("WTU5", franz, new Date(), new Date(), WorkorderStatus.New));
 
 
 
@@ -79,8 +77,8 @@ public class Runner {
             WaggonSequence ws4 = waggonSequenceRepository.save(new WaggonSequence(w4,2));
             WaggonSequence ws5 = waggonSequenceRepository.save(new WaggonSequence(w5,1));
 
-            ShunterOrder so1 = shunterOrderRepository.save(new ShunterOrder("R1", frass, new Date(), new Date(), WorkOrderStatus.New, new TreeSet(){{add(ws1);add(ws2);}}));
-            ShunterOrder so2 = shunterOrderRepository.save(new ShunterOrder("R2", frass, new Date(), new Date(), WorkOrderStatus.New, new TreeSet(){{add(ws3);add(ws4);add(ws5);}}));
+            ShunterOrder so1 = shunterOrderRepository.save(new ShunterOrder("R1", frass, new Date(), new Date(), WorkorderStatus.New, new TreeSet(){{add(ws1);add(ws2);}}));
+            ShunterOrder so2 = shunterOrderRepository.save(new ShunterOrder("R2", frass, new Date(), new Date(), WorkorderStatus.New, new TreeSet(){{add(ws3);add(ws4);add(ws5);}}));
 
 
             DefectCode dc1 = defectCodeRepository.save(new DefectCode("1.0.0", "First", "part"));
